@@ -65,4 +65,4 @@ Smart-Tools/
 ---
 
 ## 🙋 Author
-Created with ❤️ by Maulik
+Created with ❤️ by Maulik Singh Chauhan 
