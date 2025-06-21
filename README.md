@@ -1,4 +1,3 @@
-
 # 🛠️ Smart Tools – Python Utility Toolkit
 
 **Smart Tools** is a multi-functional desktop utility app built with `customtkinter`. It helps users manage files and monitor system performance — all in a single, beautiful dark-themed GUI.
@@ -15,6 +14,25 @@
 | 🗃️ File Manager   | Browse, open, delete, or rename files/folders like a mini file explorer     |
 | 📊 System Monitor | View live CPU, RAM, and Storage usage right on the home screen              |
 | 🌙 Dark UI Theme  | Permanent dark theme with customtkinter’s modern look                       |
+
+---
+
+## 📸 Screenshots
+
+### Home
+![Screenshot](assest/s2.png)
+
+### File Folder Creator
+![Screenshot](assest/s1.png)
+
+### File Organiser 
+![Screenshot](assest/s3.png)
+
+### File Manager
+![Screenshot](assest/s4.png)
+
+### File Finder
+![Screenshot](assest/s5.png)
 
 ---
 
@@ -65,4 +83,4 @@ Smart-Tools/
 ---
 
 ## 🙋 Author
-Created with ❤️ by Maulik Singh Chauhan 
+Created with ❤️ by Maulik Singh Chauhan
