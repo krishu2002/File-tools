@@ -18,12 +18,6 @@
 
 ---
 
-## 📸 Screenshots
-
-> Add your screenshots here (like the dashboard, file finder, etc.)
-
----
-
 ## 🧱 Tech Stack
 
 - Python 3.10+
