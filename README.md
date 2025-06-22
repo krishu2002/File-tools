@@ -20,7 +20,7 @@
 ## 📸 Screenshots
 
 ### Home
-![Screenshot]("assest/s2.png")
+![Screenshot](assest/s2.png)
 <img src="assest/s2.png" width="400"/>
 
 
