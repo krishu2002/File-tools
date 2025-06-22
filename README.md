@@ -20,19 +20,25 @@
 ## 📸 Screenshots
 
 ### Home
-![Screenshot](assest/s2.png)
+![Screenshot]("assest/s2.png")
+<img src="assest/s2.png" width="400"/>
+
 
 ### File Folder Creator
 ![Screenshot](assest/s1.png)
+<img src="assest/s1.png" width="400"/>
 
 ### File Organiser 
 ![Screenshot](assest/s3.png)
+<img src="assest/s3.png" width="400"/>
 
 ### File Manager
 ![Screenshot](assest/s4.png)
+<img src="assest/s4.png" width="400"/>
 
 ### File Finder
 ![Screenshot](assest/s5.png)
+<img src="assest/s5.png" width="400"/>
 
 ---
 
