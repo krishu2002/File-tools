@@ -21,24 +21,24 @@
 
 ### Home
 
-<img src="assest/s2.png" width="400"/>
+<img src="assets/s2.png" width="400"/>
 
 
 ### File Folder Creator
 
-<img src="assest/s1.png" width="400"/>
+<img src="assets/s1.png" width="400"/>
 
 ### File Organiser 
 
-<img src="assest/s3.png" width="400"/>
+<img src="assets/s3.png" width="400"/>
 
 ### File Manager
 
-<img src="assest/s4.png" width="400"/>
+<img src="assets/s4.png" width="400"/>
 
 ### File Finder
 
-<img src="assest/s5.png" width="400"/>
+<img src="assets/s5.png" width="400"/>
 
 ---
 
