@@ -1,45 +1,78 @@
 import customtkinter as ctk
+from PIL import Image
 import time
 import psutil
+import os
+import sys
+
+# ─────────────────────────────
+# DYNAMIC RESOURCE PATH FOR EXE
+# ─────────────────────────────
+def resource_path(relative_path):
+    """Get absolute path to resource for PyInstaller"""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+# ──────────────────────
+# 1. IMPORT MODULES
+# ──────────────────────
 from modules.file_organizer import open_file_organizer_window
 from modules.file_finder import open_file_finder_window
 from modules.file_maker import open_file_creator_window
 from modules.file_manager import open_file_manager_window
 
 # ──────────────────────
-# 1. SET DARK UI THEME
+# 2. SET DARK UI THEME
 # ──────────────────────
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
+# ──────────────────────
+# 3. PATHS TO IMAGES
+# ──────────────────────
+ICON_PATH = resource_path("assets/logo.ico")   # For taskbar
+LOGO_PATH = resource_path("assets/logo.png")   # For splash image
 
 # ─────────────────────────────
-# 2. SPLASH / LOADING SCREEN
+# 4. SPLASH / LOADING SCREEN
 # ─────────────────────────────
 def show_loading_screen():
     splash = ctk.CTk()
     splash.title("Smart Tools - Loading")
-    splash.geometry("400x250")
+    splash.geometry("400x300")
     splash.resizable(False, False)
 
-    label = ctk.CTkLabel(splash, text="Smart Tools", font=("Arial", 24))
-    label.pack(pady=40)
+    # Taskbar icon
+    try:
+        splash.iconbitmap(ICON_PATH)
+    except Exception as e:
+        print("Icon load failed:", e)
+
+    # Logo image
+    try:
+        logo = ctk.CTkImage(light_image=Image.open(LOGO_PATH), size=(150, 150))
+        ctk.CTkLabel(splash, image=logo, text="").pack(pady=5)
+    except Exception as e:
+        print("Logo not loaded:", e)
+        ctk.CTkLabel(splash, text="Smart Tools", font=("Arial", 22)).pack(pady=10)
+
+    ctk.CTkLabel(splash, text="Loading Smart Tools...", font=("Arial", 16)).pack(pady=10)
 
     progress = ctk.CTkProgressBar(splash, width=250)
     progress.pack(pady=20)
     progress.start()
 
-    def finish_loading():
+    def finish():
         progress.stop()
         splash.destroy()
         open_home_screen()
 
-    splash.after(3000, finish_loading)
+    splash.after(3000, finish)
     splash.mainloop()
 
-
 # ─────────────────────────────
-# 3. MAIN DASHBOARD SCREEN
+# 5. MAIN DASHBOARD SCREEN
 # ─────────────────────────────
 def open_home_screen():
     app = ctk.CTk()
@@ -47,17 +80,19 @@ def open_home_screen():
     app.geometry("850x500")
     app.resizable(False, False)
 
-    # ───── Title ─────
-    title_label = ctk.CTkLabel(app, text="🛠️ Smart Tools Dashboard", font=("Arial", 22))
-    title_label.pack(pady=20)
+    try:
+        app.iconbitmap(ICON_PATH)
+    except Exception as e:
+        print("Icon load failed:", e)
 
-    # ───── Main Frame ─────
+    ctk.CTkLabel(app, text="🛠️ Smart Tools Dashboard", font=("Arial", 22)).pack(pady=20)
+
     main_frame = ctk.CTkFrame(app)
     main_frame.pack(padx=20, pady=10, fill="both", expand=True)
 
-    # ───── Left Side: Tools Buttons ─────
-    button_frame = ctk.CTkFrame(main_frame)
-    button_frame.pack(side="left", fill="y", padx=10, pady=10)
+    # Left Tools Panel
+    tool_frame = ctk.CTkFrame(main_frame)
+    tool_frame.pack(side="left", fill="y", padx=10, pady=10)
 
     tools = {
         "📁 File Organizer": open_file_organizer_window,
@@ -67,10 +102,9 @@ def open_home_screen():
     }
 
     for label, command in tools.items():
-        btn = ctk.CTkButton(button_frame, text=label, width=240, height=40, font=("Arial", 12), command=command)
-        btn.pack(pady=8)
+        ctk.CTkButton(tool_frame, text=label, width=240, height=40, font=("Arial", 12), command=command).pack(pady=8)
 
-    # ───── Right Side: System Monitor ─────
+    # Right Stats Panel
     stats_frame = ctk.CTkFrame(main_frame)
     stats_frame.pack(side="right", fill="both", padx=20, pady=10)
 
@@ -84,25 +118,17 @@ def open_home_screen():
     ram_label.pack(pady=5)
     disk_label.pack(pady=5)
 
-    # ───── Update System Info Every Second ─────
     def update_stats():
-        cpu = psutil.cpu_percent()
-        ram = psutil.virtual_memory().percent
-        disk = psutil.disk_usage('/').percent
-
-        cpu_label.configure(text=f"🧠 CPU Usage: {cpu}%")
-        ram_label.configure(text=f"💽 RAM Usage: {ram}%")
-        disk_label.configure(text=f"📊 Disk Usage: {disk}%")
-
+        cpu_label.configure(text=f"🧠 CPU Usage: {psutil.cpu_percent()}%")
+        ram_label.configure(text=f"💽 RAM Usage: {psutil.virtual_memory().percent}%")
+        disk_label.configure(text=f"📊 Disk Usage: {psutil.disk_usage('/').percent}%")
         app.after(1000, update_stats)
 
     update_stats()
-
     app.mainloop()
 
-
 # ──────────────────────
-# 4. START APP
+# 6. START APP
 # ──────────────────────
 if __name__ == "__main__":
     show_loading_screen()
